@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boosting Service</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 12px;
+            background: #141414;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            flex-grow: 1;
+            text-align: center;
+            margin: 20px;
+            border: 1px solid #2a2a2a;
+        }
+        .logo {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.3));
+        }
+        h2 {
+            font-size: 2em;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+            margin-bottom: 20px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #ffcc00;
+            margin-bottom: 15px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        .options-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .option-box {
+            flex: 1;
+            max-width: 45%;
+        }
+        .platform-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .platform-btn {
+            padding: 10px 20px;
+            background: #222;
+            color: #e0e0e0;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .platform-btn:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+        }
+        .platform-btn.selected {
+            background: #ffcc00;
+            color: #0a0a0a;
+            border-color: #ffcc00;
+            box-shadow: 0 0 12px rgba(255, 204, 0, 0.4);
+        }
+        .sliders-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .slider-box {
+            flex: 1;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid #2a2a2a;
+        }
+        .slider-box h3 {
+            margin-top: 0;
+            color: #ffcc00;
+        }
+        .slider-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #ffcc00;
+        }
+        .slider-container input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            outline: none;
+            margin: 20px 0;
+            -webkit-appearance: none;
+        }
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #ffcc00;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #ffcc00;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .custom-select {
+            width: 100%;
+            padding: 10px;
+            background-color: #222;
+            color: #e0e0e0;
+            border: 1px solid #333;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .custom-select option {
+            background-color: #222;
+            color: #e0e0e0;
+        }
+        .cart {
+            background: #141414;
+            padding: 25px;
+            width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            margin-left: 20px;
+            border: 1px solid #2a2a2a;
+        }
+        .cart h3 {
+            color: #ffcc00;
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+        .cart .price {
+            font-size: 2.5em;
+            color: #ffcc00;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+        }
+        .cart .invoice-button {
+            width: 100%;
+            padding: 15px;
+            background: #ffcc00;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .cart .invoice-button:hover {
+            background: #ffdb4d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+        }
+        .disclaimer {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #ff3333;
+            padding: 15px;
+            font-size: 0.95em;
+            text-align: left;
+            margin: 0 0 25px 0;
+            border-radius: 4px;
+            line-height: 1.4;
+        }
+        .dropdown-container {
+            margin: 15px 0;
+        }
+        .dropdown-header {
+            background-color: #222;
+            padding: 12px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #333;
+            transition: all 0.2s ease;
+        }
+        .dropdown-header:hover {
+            background-color: #2a2a2a;
+        }
+        .next-steps .dropdown-header {
+            border-left: 4px solid #ffcc00;
+        }
+        .mobile-note .dropdown-header {
+            border-left: 4px solid #00cc66;
+        }
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #1a1a1a;
+            border-radius: 0 0 6px 6px;
+            border-left: 1px solid #333;
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        .dropdown-content.active {
+            max-height: 200px; /* Adjust as needed */
+        }
+        .dropdown-content-inner {
+            padding: 15px;
+            line-height: 1.4;
+            font-size: 0.95em;
+            text-align: left;
+        }
+        .next-steps .dropdown-content-inner {
+            background-color: rgba(255, 204, 0, 0.1);
+            border-left: 4px solid #ffcc00;
+        }
+        .mobile-note .dropdown-content-inner {
+            background-color: rgba(0, 204, 102, 0.1);
+            border-left: 4px solid #00cc66;
+        }
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+        .dropdown-header.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sliders-container {
+                flex-direction: column;
+            }
+            .options-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .option-box {
+                max-width: 100%;
+                width: 100%;
+            }
+            .cart {
+                margin-left: 0;
+                margin-top: 20px;
+                width: auto;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://i.imgur.com/xF7dKwX.png" alt="Logo" class="logo">
+    
+    <h2>Boosting Service</h2>
+
+    <div class="sliders-container">
+        <div class="slider-box">
+            <h3>Current Skill Rating</h3>
+            <div class="slider-value" id="currentValue">0</div>
+            <div class="slider-container">
+                <input type="range" id="currentSlider" min="0" max="7500" value="0" step="100">
+            </div>
+        </div>
+        
+        <div class="slider-box">
+            <h3>Desired Skill Rating</h3>
+            <div class="slider-value" id="desiredValue">0</div>
+            <div class="slider-container">
+                <input type="range" id="desiredSlider" min="0" max="7500" value="0" step="100">
+            </div>
+        </div>
+    </div>
+
+    <div class="options-row">
+        <div class="option-box">
+            <h3>Platform Selection</h3>
+            <div class="platform-section">
+                <button class="platform-btn" id="ps">PS</button>
+                <button class="platform-btn" id="xbox">Xbox</button>
+                <button class="platform-btn" id="pc">PC</button>
+            </div>
+        </div>
+        
+        <div class="option-box">
+            <h3>Average SR Per Game</h3>
+            <select id="avgSR" class="custom-select">
+                <option value="none">Please select</option>
+                <option value="low">1-30 SR (+$25)</option>
+                <option value="medium">30-60 SR (+$10)</option>
+                <option value="high">60-100+ SR (+$0)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="cart">
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> If we detect any false information regarding your average SR per game, additional fees may be applied based on the actual SR witnessed during the boosting process.
+    </div>
+    
+    <h3>Invoice</h3>
+    <p>Total Price:</p>
+    <p class="price" id="price">$0.00</p>
+    <button class="invoice-button" onclick="generateInvoice()">Generate Invoice</button>
+    
+    <div class="dropdown-container next-steps">
+        <div class="dropdown-header" onclick="toggleDropdown('nextSteps')">
+            <strong>Next Steps</strong>
+            <span class="dropdown-arrow">▼</span>
+        </div>
+        <div id="nextSteps" class="dropdown-content">
+            <div class="dropdown-content-inner">
+                Once you generate your invoice, please head to the Discord server and open a ticket under the purchase section. Then Upload the invoice to your ticket to finalize your purchase.
+            </div>
+        </div>
+    </div>
+    
+    <div class="dropdown-container mobile-note">
+        <div class="dropdown-header" onclick="toggleDropdown('mobileUsers')">
+            <strong>Mobile Users</strong>
+            <span class="dropdown-arrow">▼</span>
+        </div>
+        <div id="mobileUsers" class="dropdown-content">
+            <div class="dropdown-content-inner">
+                If you're using iOS, you'll need to save the invoice to Files. Android users should save to their device storage. Make sure to save the file before closing your browser so you can upload it to Discord later.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const currentSlider = document.getElementById('currentSlider');
+    const desiredSlider = document.getElementById('desiredSlider');
+    const currentValue = document.getElementById('currentValue');
+    const desiredValue = document.getElementById('desiredValue');
+    const priceDisplay = document.getElementById('price');
+    const avgSRSelect = document.getElementById('avgSR');
+    let selectedPlatform = null;
+
+    function updatePrice() {
+        let current = parseInt(currentSlider.value);
+        let desired = parseInt(desiredSlider.value);
+        
+        if (desired > 7500) desired = 7500;
+        if (current < 0) current = 0;
+        
+        // Only enforce this rule when current is changed, not when desired is changed
+        if (current > desired) {
+            desired = current;
+            desiredSlider.value = current;
+            desiredValue.innerText = current;
+        }
+
+        let basePrice = ((desired - current) / 7500) * 200;
+        
+        // Add price based on SR selection
+        let srValue = avgSRSelect.value;
+        if (srValue === 'low') {
+            basePrice += 25;
+        } else if (srValue === 'medium') {
+            basePrice += 10;
+        }
+        
+        priceDisplay.innerText = `$${basePrice.toFixed(2)}`;
+    }
+
+    function updateCurrentValue() {
+        currentValue.innerText = currentSlider.value;
+        
+        // If current becomes greater than desired, update desired
+        let currentVal = parseInt(currentSlider.value);
+        let desiredVal = parseInt(desiredSlider.value);
+        
+        if (currentVal > desiredVal) {
+            desiredSlider.value = currentVal;
+            desiredValue.innerText = currentVal;
+        }
+        
+        updatePrice();
+    }
+    
+    function updateDesiredValue() {
+        desiredValue.innerText = desiredSlider.value;
+        updatePrice();
+    }
+
+    function toggleDropdown(id) {
+        const dropdownContent = document.getElementById(id);
+        const dropdownHeader = dropdownContent.previousElementSibling;
+        
+        if (dropdownContent.classList.contains('active')) {
+            dropdownContent.classList.remove('active');
+            dropdownHeader.classList.remove('active');
+        } else {
+            dropdownContent.classList.add('active');
+            dropdownHeader.classList.add('active');
+        }
+    }
+
+    currentSlider.addEventListener('input', updateCurrentValue);
+    desiredSlider.addEventListener('input', updateDesiredValue);
+    avgSRSelect.addEventListener('change', updatePrice);
+
+    function generateInvoice() {
+        if (!selectedPlatform) {
+            alert("Please select a platform before generating an invoice.");
+            return;
+        }
+        
+        if (avgSRSelect.value === 'none') {
+            alert("Please select your average SR per game.");
+            return;
+        }
+
+        const srText = {
+            'low': '1-30 SR (+$25)',
+            'medium': '30-60 SR (+$10)',
+            'high': '60-100+ SR (+$0)'
+        };
+
+        const invoiceContent = `
+            DISCLAIMER: If we detect any false information regarding your average SR per game, 
+            additional fees may be applied based on the actual SR witnessed during the boosting process.
+            
+            Platform: ${selectedPlatform}
+            Average SR Per Game: ${srText[avgSRSelect.value]}
+            Current Rating: ${currentSlider.value}
+            Desired Rating: ${desiredSlider.value}
+            Total Price: ${priceDisplay.innerText}
+            
+            NEXT STEPS: Please head to the Discord server and open a ticket under the purchase section.
+            Upload this invoice to your ticket to finalize your purchase.
+            
+            MOBILE USERS: Remember to save this file to your device before closing your browser.
+        `;
+        const blob = new Blob([invoiceContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Invoice.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    const platformButtons = document.querySelectorAll('.platform-btn');
+    platformButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            platformButtons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            selectedPlatform = button.innerText;
+        });
+    });
+
+    updateCurrentValue();
+    updateDesiredValue();
+</script>
+
+</body>
+</html>
